@@ -1,0 +1,77 @@
+======================================================================
+FAILURE CASE ANALYSIS
+======================================================================
+
+[ Baseline ]
+  Clean accuracy       : 0.476
+  Worst corruption     : Blur (0.256)
+  Hardest class (clean): hand_planer (0.000)
+  Easiest class (clean): wood_chisel (0.968)
+  Avg robustness gap   : 0.084
+
+[ Rotation only ]
+  Clean accuracy       : 0.471
+  Worst corruption     : Blur (0.178)
+  Hardest class (clean): carpentry_hammer (0.000)
+  Easiest class (clean): blacksmith_hammer (0.987)
+  Avg robustness gap   : 0.099
+
+[ Crop only ]
+  Clean accuracy       : 0.457
+  Worst corruption     : Blur (0.216)
+  Hardest class (clean): carpentry_hammer (0.000)
+  Easiest class (clean): wood_chisel (0.978)
+  Avg robustness gap   : 0.105
+
+[ Flip only ]
+  Clean accuracy       : 0.472
+  Worst corruption     : Blur (0.191)
+  Hardest class (clean): hand_planer (0.000)
+  Easiest class (clean): wood_chisel (0.957)
+  Avg robustness gap   : 0.102
+
+[ Color jitter only ]
+  Clean accuracy       : 0.476
+  Worst corruption     : Blur (0.201)
+  Hardest class (clean): hand_planer (0.000)
+  Easiest class (clean): wood_chisel (0.957)
+  Avg robustness gap   : 0.092
+
+[ Cutout only ]
+  Clean accuracy       : 0.474
+  Worst corruption     : Blur (0.213)
+  Hardest class (clean): carpentry_hammer (0.000)
+  Easiest class (clean): wood_chisel (0.968)
+  Avg robustness gap   : 0.096
+
+[ Geometric combo ]
+  Clean accuracy       : 0.459
+  Worst corruption     : Blur (0.181)
+  Hardest class (clean): carpentry_hammer (0.000)
+  Easiest class (clean): wood_chisel (0.968)
+  Avg robustness gap   : 0.091
+
+[ Color combo ]
+  Clean accuracy       : 0.477
+  Worst corruption     : Blur (0.226)
+  Hardest class (clean): hand_planer (0.000)
+  Easiest class (clean): wood_chisel (0.957)
+  Avg robustness gap   : 0.087
+
+[ Full mix ]
+  Clean accuracy       : 0.466
+  Worst corruption     : Blur (0.141)
+  Hardest class (clean): hand_planer (0.000)
+  Easiest class (clean): wood_chisel (0.946)
+  Avg robustness gap   : 0.112
+
+======================================================================
+HYPOTHESIS EVALUATION
+======================================================================
+Augmentation teaches invariances:
+  - Geometric (crop/flip/rotation) → spatial invariance → should reduce Blur gap
+  - Color jitter → photometric invariance → should reduce Brightness / LowContrast gap
+  - Cutout → occlusion robustness → may help Noise but not Blur
+  - Full mix → should dominate all corruptions
+  - Atomic ablation isolates which invariance each aug provides
+  Compare atomic rows vs combined rows in heatmap_overall.png
